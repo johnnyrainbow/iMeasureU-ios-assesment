@@ -18,6 +18,8 @@ extension Character { //Extension to provide a simple method to get ascii value 
         }
     }
 }
+
+//The data that a typical UITableView cell will contain
 struct cellData {
     var first_name = String()
     var last_name = String()
@@ -28,17 +30,9 @@ struct cellData {
     var yearsInLeague = String()
     var college = String()
 }
-class HeadlineTableViewCell: UITableViewCell {
-    
-    @IBOutlet weak var position: UILabel!
-    @IBOutlet weak var number: UILabel!
-    @IBOutlet weak var fullName: UILabel!
-    @IBOutlet weak var dob: UILabel!
-    @IBOutlet weak var years: UILabel!
-    @IBOutlet weak var college: UILabel!
-    @IBOutlet weak var country: UILabel!
-}
-class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+    @IBOutlet weak var searchBar: UISearchBar!
     var tableViewData = [cellData]()
     var players = [Int]()
     var dateUtil = DateUtil()
@@ -51,29 +45,15 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Register the table view cell class and its reuse id
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         
-        // (optional) include this line if you want to remove the extra empty cell divider lines
-        // self.tableView.tableFooterView = UIView()
-        
         // This view controller itself will provide the delegate methods and row data for the table view.
+        searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         let csv:CSVReader = CSVUtil.readCSV()
         CSVUtil.populatePlayerData(csv: csv)
         
-        //for each player
-        
-        Player.players.forEach { player in
-            print(player.attributes)
-           
-            tableViewData.append(
-                cellData(first_name: player.attributes["first_name"]!, last_name:player.attributes["last_name"]!,
-                number: player.attributes["number"]!,
-                position: player.attributes["position"]!,
-                dob: player.attributes["dob"]!,
-                country: player.attributes[""]!,
-                yearsInLeague: player.attributes["years_in_league"]!,
-                college:player.attributes["college"]!))
-        }
+        //for each player, populate cell data.
+        populateTableViewData(players:Player.players)
         //TODO write tests
         let sortedPlayers = Sorting.sort(key:"first_name", ascending:false) //sort by key
         print("---- SORTED ---- ")
@@ -88,7 +68,35 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         Player.displayPlayers(players: filteredPlayers)
 
     }
-   
+    
+    func populateTableViewData(players: [Player]) {
+        players.forEach { player in
+            tableViewData.append(
+                cellData(first_name: player.attributes["first_name"]!, last_name:player.attributes["last_name"]!,
+                         number: player.attributes["number"]!,
+                         position: player.attributes["position"]!,
+                         dob: player.attributes["dob"]!,
+                         country: player.attributes[""]!,
+                         yearsInLeague: player.attributes["years_in_league"]!,
+                         college:player.attributes["college"]!))
+        }
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+
+        var filteredPlayers = [Player]()
+        
+        if(searchText == "" ) { //Empty search string, display original data
+           filteredPlayers = Player.players
+        } else {
+            filteredPlayers = Sorting.anyKeyFilterQuery(query: searchText, strict:false)
+        }
+ 
+        tableViewData.removeAll()
+        populateTableViewData(players:filteredPlayers)
+       
+        tableView.reloadData()
+    }
+    
      func numberOfSections(in tableView: UITableView) -> Int {
         return tableViewData.count
     }
@@ -99,7 +107,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return 100.0
     }
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell") as! HeadlineTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell") as! PlayerTableViewCell
         var data = tableViewData[indexPath.section]
         cell.fullName?.text = data.first_name + " " + data.last_name
         if(Parser.isInt(string:data.number)){

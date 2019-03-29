@@ -10,7 +10,7 @@ import Foundation
 import CSV
 
 class CSVUtil { //Static Util class
-    
+    static var headerRow = [String]()
      static func readCSV() -> CSVReader {
         //Get the path of the csv file
         let file_url = Bundle.main.path(forResource: "players_sample", ofType: "csv")
@@ -25,7 +25,7 @@ class CSVUtil { //Static Util class
     
      static func populatePlayerData(csv: CSVReader) {
         //First row is headers
-        let headerRow = csv.headerRow!
+        headerRow = csv.headerRow!
         
         while let row = csv.next() {
             //We define a generic system that takes a row header and creates a key for a player by that value.

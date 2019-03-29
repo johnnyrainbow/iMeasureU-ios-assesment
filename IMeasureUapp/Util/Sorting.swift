@@ -32,6 +32,27 @@ class Sorting { //Static Util class
         return filterList
     }
     
+    static func anyKeyFilterQuery(query: String, strict: Bool) -> [Player] {
+        //returns a list of players with key value *containing query
+        var filterList = [Player]()
+        
+        Player.players.forEach { player in
+            CSVUtil.headerRow.forEach { key in
+                print(key)
+                if(strict) {
+                    if(player.attributes[key.lowercased()]!.contains(query)) {
+                        filterList.append(player)
+                    }
+                } else {
+                    if(player.attributes[key.lowercased()]!.localizedCaseInsensitiveContains(query)) {
+                        filterList.append(player)
+                    }
+                }
+            }
+        }
+        return filterList
+    }
+    
     static func filterBounds(key: String, lowerBound: Int, upperBound:Int ) -> [Player] {
         //returns a list of players with values within key value bounds.
         //Does not currently work for dates.
