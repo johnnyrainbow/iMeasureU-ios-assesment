@@ -38,13 +38,25 @@ class HeadlineTableViewCell: UITableViewCell {
     @IBOutlet weak var college: UILabel!
     @IBOutlet weak var country: UILabel!
 }
-class TableViewController: UITableViewController {
+class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var tableViewData = [cellData]()
     var players = [Int]()
     var dateUtil = DateUtil()
 
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let cellReuseIdentifier = "cell"
+        // Register the table view cell class and its reuse id
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        
+        // (optional) include this line if you want to remove the extra empty cell divider lines
+        // self.tableView.tableFooterView = UIView()
+        
+        // This view controller itself will provide the delegate methods and row data for the table view.
+        tableView.delegate = self
+        tableView.dataSource = self
         let csv:CSVReader = CSVUtil.readCSV()
         CSVUtil.populatePlayerData(csv: csv)
         
@@ -76,16 +88,17 @@ class TableViewController: UITableViewController {
         Player.displayPlayers(players: filteredPlayers)
 
     }
-    override func numberOfSections(in tableView: UITableView) -> Int {
+   
+     func numberOfSections(in tableView: UITableView) -> Int {
         return tableViewData.count
     }
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
     }
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell") as! HeadlineTableViewCell
         var data = tableViewData[indexPath.section]
         cell.fullName?.text = data.first_name + " " + data.last_name
