@@ -6,8 +6,6 @@
 //  Copyright © 2019 Gabriel Kennedy. All rights reserved.
 //
 
-import Foundation
-
 class Player {
     static var players = [Player]()
 
@@ -16,5 +14,4 @@ class Player {
     init() {
         Player.players.append(self)
     }
-   
 }
