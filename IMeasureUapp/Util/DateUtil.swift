@@ -25,10 +25,13 @@ class DateUtil { //Static Util class
     }
     
     static func dateFormatter(month:String, day:String, year:String) -> Date? {
+
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "mm-dd-yyyy"
-        dateFormatter.timeZone = TimeZone.current
-        dateFormatter.locale = Locale.current
-        return dateFormatter.date(from: month + day + year) // replace Date String
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        dateFormatter.dateStyle = DateFormatter.Style.long
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let convertedDate = dateFormatter.date(from:  year + "-" + month + "-" + day)
+
+        return convertedDate
     }
 }

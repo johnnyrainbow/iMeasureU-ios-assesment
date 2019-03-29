@@ -20,17 +20,16 @@ class CSVUtil { //Static Util class
         
         //Pass into CSVReader
         let csv = try! CSVReader(stream: stream,hasHeaderRow: true)
-        
         return csv
     }
-     static func traverseRows(csv: CSVReader) {
+    
+     static func populatePlayerData(csv: CSVReader) {
         //First row is headers
         let headerRow = csv.headerRow!
         
         while let row = csv.next() {
-            //We want to define a generic system that takes a row header and creates a key for a player by that value.
+            //We define a generic system that takes a row header and creates a key for a player by that value.
             let p = Player() //Declare a new player
-            
             //Iterate header keys
             headerRow.forEach { key in
                 Parser.parse(player: p, key:key,csv:csv)

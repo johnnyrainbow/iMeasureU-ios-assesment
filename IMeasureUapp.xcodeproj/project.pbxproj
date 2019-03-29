@@ -19,6 +19,7 @@
 		0360BBAE224DD7500046E60E /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0360BBAD224DD7500046E60E /* DateUtil.swift */; };
 		0360BBB0224DD9560046E60E /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0360BBAF224DD9560046E60E /* Parser.swift */; };
 		0360BBB2224DDA660046E60E /* CSVUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0360BBB1224DDA660046E60E /* CSVUtil.swift */; };
+		0360BBB7224DEA170046E60E /* Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0360BBB6224DEA170046E60E /* Sorting.swift */; };
 		51F3F8A7A3A34CA446F37159 /* Pods_IMeasureUappUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32F565CC29CC131FE4F2671 /* Pods_IMeasureUappUITests.framework */; };
 		8193F56FF47392771584A190 /* Pods_IMeasureUappTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3879FBBE1EFD983337CC3DD /* Pods_IMeasureUappTests.framework */; };
 		B300E84BB1E43266E2ADCBB1 /* Pods_IMeasureUapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55F47B43724CD2C1E77EC97B /* Pods_IMeasureUapp.framework */; };
@@ -60,6 +61,7 @@
 		0360BBAD224DD7500046E60E /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		0360BBAF224DD9560046E60E /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		0360BBB1224DDA660046E60E /* CSVUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVUtil.swift; sourceTree = "<group>"; };
+		0360BBB6224DEA170046E60E /* Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sorting.swift; sourceTree = "<group>"; };
 		2C8F92CDE5D3B63BB0E2DDF2 /* Pods-IMeasureUapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMeasureUapp.release.xcconfig"; path = "Target Support Files/Pods-IMeasureUapp/Pods-IMeasureUapp.release.xcconfig"; sourceTree = "<group>"; };
 		329551FA4C00F4894DE0B070 /* Pods-IMeasureUapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMeasureUapp.debug.xcconfig"; path = "Target Support Files/Pods-IMeasureUapp/Pods-IMeasureUapp.debug.xcconfig"; sourceTree = "<group>"; };
 		55F47B43724CD2C1E77EC97B /* Pods_IMeasureUapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IMeasureUapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +163,7 @@
 				0360BBAF224DD9560046E60E /* Parser.swift */,
 				0360BBB1224DDA660046E60E /* CSVUtil.swift */,
 				0360BBAD224DD7500046E60E /* DateUtil.swift */,
+				0360BBB6224DEA170046E60E /* Sorting.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				0360BBAE224DD7500046E60E /* DateUtil.swift in Sources */,
 				0360BBB0224DD9560046E60E /* Parser.swift in Sources */,
 				0360BBAC224D8F1A0046E60E /* Player.swift in Sources */,
+				0360BBB7224DEA170046E60E /* Sorting.swift in Sources */,
 				0360BB7A224D84CD0046E60E /* AppDelegate.swift in Sources */,
 				0360BBB2224DDA660046E60E /* CSVUtil.swift in Sources */,
 			);

@@ -15,8 +15,8 @@ class Player {
         Player.players.append(self)
     }
     
-    static func displayPlayers() {//Util func
-        Player.players.forEach { player in
+    static func displayPlayers(players : [Player]) {//Util func
+        players.forEach { player in
             print(player.attributes)
         }
     }

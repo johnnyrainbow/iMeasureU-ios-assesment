@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CSV //simple way to read csv files TODO reference non lib way
+import CSV //simple lib to read csv
 import Foundation
 
 extension Character { //Extension to provide a simple method to get ascii value of char
@@ -25,12 +25,23 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-       let csv = CSVUtil.readCSV()
+        let csv:CSVReader = CSVUtil.readCSV() 
         
-        CSVUtil.traverseRows(csv: csv);
+        CSVUtil.populatePlayerData(csv: csv)
         
-        Parser.sort(key:"dob")
-        Player.displayPlayers()
+        //TODO write tests
+        let sortedPlayers = Sorting.sort(key:"first_name", ascending:false) //sort by key
+        print("---- SORTED ---- ")
+        Player.displayPlayers(players: sortedPlayers)
+
+        print("---- FILTERED QUERY ---- ")
+        var filteredPlayers = Sorting.filterQuery(key: "college", query: "Lo")
+        Player.displayPlayers(players: filteredPlayers)
+        
+        print("---- FILTERED BOUNDS ---- ")
+        filteredPlayers = Sorting.filterBounds(key: "years_in_league", lowerBound: 5, upperBound: 8)
+        Player.displayPlayers(players: filteredPlayers)
+
     }   
 }
 
