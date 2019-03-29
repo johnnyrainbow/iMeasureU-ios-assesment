@@ -7,7 +7,16 @@
 //
 
 import Foundation
-import CSV 
+import CSV
+
+extension Character { //Extension to provide a simple method to get ascii value of char
+    var asciiValue: Int {
+        get {
+            let s = String(self).unicodeScalars
+            return Int(s[s.startIndex].value)
+        }
+    }
+}
 
 class Parser { //Static Util class
     

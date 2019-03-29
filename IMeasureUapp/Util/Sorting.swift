@@ -12,13 +12,12 @@ class Sorting { //Static Util class
     
     static func sort(players: [Player],key: String, ascending: Bool) -> [Player] { //sorts the player list by header key in an ascending or descending order
         //No strict
-        var lowerKey = key.lowercased()
+        let lowerKey = key.lowercased()
        
         if(ascending) {
             return players.sorted(by: { Parser.stringParser(value: $0.attributes[lowerKey]!) < Parser.stringParser(value:$1.attributes[lowerKey]!)
             })
         }
-        
         //descending
         return Player.players.sorted(by: { Parser.stringParser(value: $0.attributes[lowerKey]!) > Parser.stringParser(value:$1.attributes[lowerKey]!)
         })
