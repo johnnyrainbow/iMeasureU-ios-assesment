@@ -76,4 +76,9 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return CSVUtil.headerRow[row]
     }
+    
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let attributedString = NSAttributedString(string: CSVUtil.headerRow[row], attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+        return attributedString
+    }
 }
