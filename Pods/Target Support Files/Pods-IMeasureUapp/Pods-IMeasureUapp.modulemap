@@ -1,0 +1,6 @@
+framework module Pods_IMeasureUapp {
+  umbrella header "Pods-IMeasureUapp-umbrella.h"
+
+  export *
+  module * { export * }
+}
