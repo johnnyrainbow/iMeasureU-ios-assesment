@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         //Register the table view cell class and its reuse id
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         //Set to custom BG
-        self.tableView.backgroundColor = UIColor.init(red: 14/255, green: 33/255, blue: 84/255, alpha: 1.0)
+        self.tableView.backgroundColor = UIColor.init(red: 0/255, green: 24/255, blue: 75/255, alpha: 1.0)
         //Semoves empty cell lines
         tableView.tableFooterView = UIView()
         //Assign delegates

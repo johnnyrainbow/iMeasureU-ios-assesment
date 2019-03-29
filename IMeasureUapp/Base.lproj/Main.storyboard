@@ -94,7 +94,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.0" green="0.095848393403498447" blue="0.2936627538071066" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="backgroundColor" red="0.0" green="0.094117647058823528" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
                                                 <constraint firstItem="9Id-nv-7m4" firstAttribute="top" secondItem="eJW-Ur-2Va" secondAttribute="topMargin" id="1xz-7K-efS"/>
                                                 <constraint firstItem="uVA-3E-Qpw" firstAttribute="bottom" secondItem="eJW-Ur-2Va" secondAttribute="bottomMargin" id="2xf-fS-FI8"/>
@@ -148,7 +148,8 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pickerView>
                         </subviews>
-                        <color key="backgroundColor" red="0.054901960784313725" green="0.12941176470588234" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.0" green="0.094117647058823528" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="tintColor" red="0.92551761870000004" green="0.92546266320000004" blue="0.92549175019999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="gB3-uR-N4t" firstAttribute="trailing" secondItem="PYp-5c-Ulb" secondAttribute="trailing" id="4pK-RL-bNT"/>
                             <constraint firstItem="gB3-uR-N4t" firstAttribute="top" secondItem="PYp-5c-Ulb" secondAttribute="top" id="9C5-fs-eEJ"/>
