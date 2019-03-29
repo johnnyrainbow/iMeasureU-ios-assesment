@@ -31,7 +31,7 @@ class Parser { //Static Util class
             //Convert Date to TimeInterval (typealias for Double)
             let timeInterval = date.timeIntervalSince1970
             //Return date as an Int
-            return Int(timeInterval)
+            return -Int(timeInterval) //Recent dates first
         }
         //Is String
         return value[value.startIndex].asciiValue

@@ -8,7 +8,7 @@
 
 class Player {
     static var players = [Player]()
-
+    static var currentPlayerList = [Player]()
     var attributes : [String : String] = [String:String]()
     
     init() {

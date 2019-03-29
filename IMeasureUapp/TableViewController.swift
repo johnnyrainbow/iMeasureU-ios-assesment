@@ -36,7 +36,8 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var tableViewData = [cellData]()
     var players = [Int]()
     var dateUtil = DateUtil()
-
+    var currentSearchQuery:String = ""
+    @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +46,8 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Register the table view cell class and its reuse id
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         
+        pickerView.delegate = self
+        pickerView.dataSource = self
         // This view controller itself will provide the delegate methods and row data for the table view.
         searchBar.delegate = self
         tableView.delegate = self
@@ -55,12 +58,12 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //for each player, populate cell data.
         populateTableViewData(players:Player.players)
         //TODO write tests
-        let sortedPlayers = Sorting.sort(key:"first_name", ascending:false) //sort by key
+        let sortedPlayers = Sorting.sort(players: Player.players, key:"first_name", ascending:false) //sort by key
         print("---- SORTED ---- ")
         Player.displayPlayers(players: sortedPlayers)
 
         print("---- FILTERED QUERY ---- ")
-        var filteredPlayers = Sorting.filterQuery(key: "college", query: "Lo")
+        var filteredPlayers = Sorting.filterQuery(players: Player.players, key: "college", query: "Lo")
         Player.displayPlayers(players: filteredPlayers)
         
         print("---- FILTERED BOUNDS ---- ")
@@ -76,24 +79,29 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
                          number: player.attributes["number"]!,
                          position: player.attributes["position"]!,
                          dob: player.attributes["dob"]!,
-                         country: player.attributes[""]!,
+                         country: player.attributes["country"]!,
                          yearsInLeague: player.attributes["years_in_league"]!,
                          college:player.attributes["college"]!))
         }
+        Player.currentPlayerList = players //Update the current player list
+    }
+    func sortQuery(query:String) -> [Player] {
+        var filteredPlayers = Player.players
+        
+        if(query != "" ) {
+            filteredPlayers = Sorting.anyKeyFilterQuery(players: Player.players, query: query, strict:false)
+        }
+        //Empty search string, display original data
+        return filteredPlayers
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
-        var filteredPlayers = [Player]()
+        //reset picker
+        pickerView.selectRow(0, inComponent: 0, animated: true)
         
-        if(searchText == "" ) { //Empty search string, display original data
-           filteredPlayers = Player.players
-        } else {
-            filteredPlayers = Sorting.anyKeyFilterQuery(query: searchText, strict:false)
-        }
- 
+        let filteredPlayers = sortQuery(query: searchText)
+        Player.displayPlayers(players: filteredPlayers)
         tableViewData.removeAll()
         populateTableViewData(players:filteredPlayers)
-       
         tableView.reloadData()
     }
     
@@ -118,11 +126,38 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.college?.text = data.college
         cell.country?.text = data.country.uppercased()
         cell.dob?.text = data.dob
-        cell.dob.center = self.view.center
         cell.years?.text = data.yearsInLeague
        // cell.fullName.sizeToFit()
       
         return cell
+    }
+}
+extension TableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        //New option picked
+        print(CSVUtil.headerRow[row])
+        let players = Player.currentPlayerList;
+       
+        let sortedPlayers = Sorting.sort(players: players, key:CSVUtil.headerRow[row], ascending:true) //sort by key
+        tableViewData.removeAll()
+        populateTableViewData(players:sortedPlayers)
+        tableView.reloadData()
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return CSVUtil.headerRow.count
+    }
+    
+//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//        detailLabel.text = CSVUtil.headerRow[row]
+//    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return CSVUtil.headerRow[row]
     }
 }
 

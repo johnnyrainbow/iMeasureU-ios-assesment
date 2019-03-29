@@ -10,21 +10,24 @@ import Foundation
 
 class Sorting { //Static Util class
     
-    static func sort(key: String, ascending: Bool) -> [Player] { //sorts the player list by header key in an ascending or descending order
+    static func sort(players: [Player],key: String, ascending: Bool) -> [Player] { //sorts the player list by header key in an ascending or descending order
+        //No strict
+        var lowerKey = key.lowercased()
+       
         if(ascending) {
-            return Player.players.sorted(by: { Parser.stringParser(value: $0.attributes[key]!) < Parser.stringParser(value:$1.attributes[key]!)
+            return players.sorted(by: { Parser.stringParser(value: $0.attributes[lowerKey]!) < Parser.stringParser(value:$1.attributes[lowerKey]!)
             })
         }
         
         //descending
-        return Player.players.sorted(by: { Parser.stringParser(value: $0.attributes[key]!) > Parser.stringParser(value:$1.attributes[key]!)
+        return Player.players.sorted(by: { Parser.stringParser(value: $0.attributes[lowerKey]!) > Parser.stringParser(value:$1.attributes[lowerKey]!)
         })
     }
     
-    static func filterQuery(key: String, query: String) -> [Player] {
+    static func filterQuery(players: [Player], key: String, query: String) -> [Player] {
         //returns a list of players with key value *containing query
         var filterList = [Player]()
-        Player.players.forEach { player in
+        players.forEach { player in
             if(player.attributes[key]!.contains(query)) {
                 filterList.append(player)
             }
@@ -32,20 +35,23 @@ class Sorting { //Static Util class
         return filterList
     }
     
-    static func anyKeyFilterQuery(query: String, strict: Bool) -> [Player] {
+    static func anyKeyFilterQuery(players: [Player],query: String, strict: Bool) -> [Player] {
         //returns a list of players with key value *containing query
         var filterList = [Player]()
         
-        Player.players.forEach { player in
+            players.forEach { player in
             CSVUtil.headerRow.forEach { key in
-                print(key)
-                if(strict) {
-                    if(player.attributes[key.lowercased()]!.contains(query)) {
-                        filterList.append(player)
-                    }
-                } else {
-                    if(player.attributes[key.lowercased()]!.localizedCaseInsensitiveContains(query)) {
-                        filterList.append(player)
+                //Prevent duplicates
+                if !filterList.contains(where: {($0.attributes["number"] == player.attributes["number"])}){
+                    
+                    if(strict) {
+                        if(player.attributes[key.lowercased()]!.contains(query)) {
+                            filterList.append(player)
+                        }
+                    } else {
+                        if(player.attributes[key.lowercased()]!.localizedCaseInsensitiveContains(query)) {
+                            filterList.append(player)
+                        }
                     }
                 }
             }
