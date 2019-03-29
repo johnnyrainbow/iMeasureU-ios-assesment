@@ -14,4 +14,10 @@ class Player {
     init() {
         Player.players.append(self)
     }
+    
+    static func displayPlayers() {//Util func
+        Player.players.forEach { player in
+            print(player.attributes)
+        }
+    }
 }
