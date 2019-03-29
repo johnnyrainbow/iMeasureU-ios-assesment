@@ -24,9 +24,8 @@ class ViewController: UIViewController {
     var dateUtil = DateUtil()
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        let csv:CSVReader = CSVUtil.readCSV() 
-        
+
+        let csv:CSVReader = CSVUtil.readCSV()
         CSVUtil.populatePlayerData(csv: csv)
         
         //TODO write tests

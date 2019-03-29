@@ -33,9 +33,8 @@ class Parser { //Static Util class
             //Return date as an Int
             return Int(timeInterval)
         }
-        
-            //Is String
-            return value[value.startIndex].asciiValue
+        //Is String
+        return value[value.startIndex].asciiValue
     }
     
     static func parseDateCSVString(value: String) -> Date {

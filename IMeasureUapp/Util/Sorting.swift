@@ -19,8 +19,8 @@ class Sorting { //Static Util class
         //descending
         return Player.players.sorted(by: { Parser.stringParser(value: $0.attributes[key]!) > Parser.stringParser(value:$1.attributes[key]!)
         })
-        
     }
+    
     static func filterQuery(key: String, query: String) -> [Player] {
         //returns a list of players with key value *containing query
         var filterList = [Player]()
