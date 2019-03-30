@@ -119,6 +119,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.054901960784313725" green="0.12941176470588234" blue="0.32941176470588235" alpha="0.84705882352941175" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="tintColor" red="0.0" green="0.18716946235213006" blue="0.58072255710659892" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <outlet property="college" destination="2ld-pG-zwJ" id="Nvx-Uj-fzH"/>
                                             <outlet property="country" destination="B3R-JC-1RO" id="5BN-cw-GY0"/>

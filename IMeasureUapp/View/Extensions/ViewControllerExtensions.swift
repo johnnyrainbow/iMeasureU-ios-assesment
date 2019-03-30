@@ -21,8 +21,22 @@ extension ViewController: UISearchBarDelegate {
         populateTableViewData(players:filteredPlayers)
         tableView.reloadData()
     }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
+    {
+        self.searchBar.endEditing(true)
+    }
 }
-
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tapGesture = UITapGestureRecognizer(target: self,
+                                                action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func hideKeyboard() {
+        view.endEditing(true)
+    }
+}
 //TableView extension
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -34,6 +48,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell") as! PlayerTableViewCell
         var data = tableViewData[indexPath.section]

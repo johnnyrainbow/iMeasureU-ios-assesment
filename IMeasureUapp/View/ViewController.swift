@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        hideKeyboardWhenTappedAround() //Since UISearchbar procs keyboard
         let cellReuseIdentifier = "cell"
         //Register the table view cell class and its reuse id
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
@@ -32,6 +32,7 @@ class ViewController: UIViewController {
         self.tableView.backgroundColor = UIColor.init(red: 0/255, green: 24/255, blue: 75/255, alpha: 1.0)
         //Semoves empty cell lines
         tableView.tableFooterView = UIView()
+        
         //Assign delegates
         tableView.delegate = self
         tableView.dataSource = self
